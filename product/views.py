@@ -41,7 +41,7 @@ def product_detail_api_view(request, id):
 
 @api_view(http_method_names=['GET'])
 def review_list_api_view(request):
-    reviews = Review.objects.all()
+    reviews = Review.objects.select_related('product').all()
     list_ = ReviewSerializer(reviews, many=True).data
 
     return Response(data=list_)
